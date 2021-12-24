@@ -1,10 +1,11 @@
 import React from 'react';
-import { EditIcon } from './Svgs';
+import { EditIcon, Garbage } from './Svgs';
 
-function Question({ question, index, setEditing }) {
+function Question({ question, index, setEditing, onDelete }) {
 	const options = question.answers;
 	return (
 		<div className='questionWrapper' key={index}>
+			<div onClick={() => onDelete(index)} className='removeQuestion cursor'><Garbage /></div>
 			<div className='editButton' onClick={() => setEditing(question.id)}><EditIcon /></div>
 			<div className='column'>
 				<span className='title aBeeZee'>{question.text}</span>

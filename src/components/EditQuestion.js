@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from "react-intl";
+import { Plus } from './Svgs';
 
 function EditQuestion({ question, index, setEditing, setQuiz, questions }) {
 	const [tempQuestion, setTempQuestion] = useState(question);
@@ -26,13 +27,24 @@ function EditQuestion({ question, index, setEditing, setQuiz, questions }) {
 		setTempQuestion((prev) => ({ ...prev, answers: temp }));
 	}
 	const onSelect = (id) => {
-		temp = tempQuestion.answers.slice();
+		temp = options.slice();
 		temp.map((answer) => {
 			if (answer.id === id)
 				answer.is_true = true;
 			else answer.is_true = false;
 		});
 		setOptions([...temp]);
+	}
+	const onAddQuestion = () => {
+		setOptions((prev) => ([
+			...prev,
+			{
+				"id": options.length,
+				"is_true": false,
+				"text": ""
+			},
+		]
+		));
 	}
 	return (
 		<div className='questionWrapper' key={index}>
@@ -65,6 +77,7 @@ function EditQuestion({ question, index, setEditing, setQuiz, questions }) {
 						</div>
 					})
 					}
+					<div onClick={onAddQuestion} className='addAnswer cursor'><Plus /></div>
 				</div>
 			</div>
 			<div className='row buttonsRow'>

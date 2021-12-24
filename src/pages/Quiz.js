@@ -3,6 +3,7 @@ import Question from '../components/Question';
 import EditQuestion from '../components/EditQuestion';
 import QuizMetaData from '../components/QuizMetaData';
 import EditQuizMetaData from '../components/EditQuizMetaData';
+import { Plus, Garbage } from '../components/Svgs';
 
 const Quiz = {
 	"created": "2020-09-09 09:26:39",
@@ -92,6 +93,34 @@ function Assignment({ history }) {
 	const [editingQuizMeatData, setEditingQuizMetaData] = useState(false);
 	const [editingQuestion, setEditingQuestion] = useState(null);
 	const { innerHeight: height } = window;
+	const onAddQuestion = () => {
+		setEditingQuestion(quiz.questions_answers.length);
+		setQuiz((prev) => ({
+			...prev, questions_answers: [...prev.questions_answers, {
+				"answer_id": null,
+				"answers": [
+					{
+						"id": null,
+						"is_true": true,
+						"text": ""
+					},
+				],
+				"feedback_false": "",
+				"feedback_true": "",
+				"id": prev.questions_answers.length,
+				"text": ""
+			}]
+		}));
+	}
+	let temp;
+	const onDelete = (deletedIndex) => {
+		temp = [];
+		quiz.questions_answers.map((question, index) => {
+			if (index !== deletedIndex)
+				temp.push(question);
+		});
+		setQuiz((prev) => ({ ...prev, questions_answers: temp }));
+	}
 	return (
 		<div className={`assignmentPage`}>
 			<div className='textContainer'>
@@ -113,13 +142,15 @@ function Assignment({ history }) {
 									setEditing={setEditingQuestion}
 									index={index}
 									setQuiz={setQuiz}
-									questions={quiz.questions_answers.slice()} />;
+									questions={quiz.questions_answers.slice()} />
 							return <Question
 								question={question}
 								key={index}
 								index={index}
-								setEditing={setEditingQuestion} />
+								setEditing={setEditingQuestion}
+								onDelete={onDelete} />
 						})}
+						<div onClick={onAddQuestion} className='addQuestion questionWrapper cursor'><Plus /></div>
 					</div>
 				</div>
 			</div>
