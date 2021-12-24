@@ -68,7 +68,6 @@ input,
 textarea {
   height: 48px;
   border-radius: 8px;
-  width: 100%;
   border: 1px solid $gray;
   outline: none;
   padding: 10px 15px;
@@ -258,6 +257,26 @@ form {
     .finalScore {
       color: $purple;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      input {
+        margin-left: 10px;
+      }
+    }
+    .editButton {
+      position: absolute;
+      right: 30px;
+      top: 21px;
+      cursor: pointer;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+      &:hover {
+        svg {
+          color: $purple;
+        }
+      }
     }
   }
 }
@@ -351,4 +370,21 @@ form {
     }
   }
 }
-
+.editQuiz {
+  input {
+    margin: 20px 0;
+  }
+  .row {
+    margin: 20px 0;
+  }
+  button {
+    font-size: 16px;
+    margin: 0 10px;
+  }
+  .saveButton {
+    background-color: $purple;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 15px;
+  }
+}

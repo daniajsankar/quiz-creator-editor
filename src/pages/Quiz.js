@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Radio from '../components/Question';
 import QuizMetaData from '../components/QuizMetaData';
+import EditQuizMetaData from '../components/EditQuizMetaData';
 
 const Quiz = {
 	"created": "2020-09-09 09:26:39",
@@ -87,12 +88,17 @@ const Quiz = {
 };
 function Assignment({ history }) {
 	const [quiz, setQuiz] = useState(Quiz);
+	const [editing, setEditing] = useState(false);
 	const { innerHeight: height } = window;
 	return (
 		<div className={`assignmentPage`}>
 			<div className='textContainer'>
 				<div className="scroll" style={{ height: height - 180 }} id="scroll" >
-					<QuizMetaData quiz={quiz} />
+					{editing ? <EditQuizMetaData quiz={quiz} onCancel={() => setEditing(false)} onSave={(quiz) => {
+						setEditing(false);
+						setQuiz((prev) => ({ ...prev, ...quiz }));
+					}} /> :
+						<QuizMetaData quiz={quiz} setEditing={setEditing} />}
 				</div>
 			</div>
 			<div className={`questionsContainer`}>
