@@ -1,5 +1,11 @@
 {
   "finalScore": "Final Score",
   "save": "Save",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "title": "Title",
+  "description": "Description",
+  "youtubeUrl": "Youtube Url",
+  "trueFeedback": "True Feedback",
+  "falseFeedback": "False Feedback",
+  "option": "Option"
 }

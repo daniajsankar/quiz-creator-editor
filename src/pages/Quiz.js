@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Radio from '../components/Question';
+import Question from '../components/Question';
+import EditQuestion from '../components/EditQuestion';
 import QuizMetaData from '../components/QuizMetaData';
 import EditQuizMetaData from '../components/EditQuizMetaData';
 
@@ -88,24 +89,36 @@ const Quiz = {
 };
 function Assignment({ history }) {
 	const [quiz, setQuiz] = useState(Quiz);
-	const [editing, setEditing] = useState(false);
+	const [editingQuizMeatData, setEditingQuizMetaData] = useState(false);
+	const [editingQuestion, setEditingQuestion] = useState(null);
 	const { innerHeight: height } = window;
 	return (
 		<div className={`assignmentPage`}>
 			<div className='textContainer'>
 				<div className="scroll" style={{ height: height - 180 }} id="scroll" >
-					{editing ? <EditQuizMetaData quiz={quiz} onCancel={() => setEditing(false)} onSave={(quiz) => {
-						setEditing(false);
+					{editingQuizMeatData ? <EditQuizMetaData quiz={quiz} onCancel={() => setEditingQuizMetaData(false)} onSave={(quiz) => {
+						setEditingQuizMetaData(false);
 						setQuiz((prev) => ({ ...prev, ...quiz }));
 					}} /> :
-						<QuizMetaData quiz={quiz} setEditing={setEditing} />}
+						<QuizMetaData quiz={quiz} setEditing={setEditingQuizMetaData} />}
 				</div>
 			</div>
 			<div className={`questionsContainer`}>
 				<div className="scroll" style={{ height: height - 100 }} id="scroll">
 					<div className='direction'>
 						{quiz.questions_answers.map((question, index) => {
-							return <Radio question={question} key={index} setQuestions={setQuiz} index={index} questions={quiz} />
+							if (question.id === editingQuestion)
+								return <EditQuestion question={question}
+									key={index}
+									setEditing={setEditingQuestion}
+									index={index}
+									setQuiz={setQuiz}
+									questions={quiz.questions_answers.slice()} />;
+							return <Question
+								question={question}
+								key={index}
+								index={index}
+								setEditing={setEditingQuestion} />
 						})}
 					</div>
 				</div>

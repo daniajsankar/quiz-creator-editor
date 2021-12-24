@@ -1,15 +1,11 @@
 import React from 'react';
+import { EditIcon } from './Svgs';
 
-function Question({ question, setQuestions, index, questions }) {
+function Question({ question, index, setEditing }) {
 	const options = question.answers;
-	let temp;
-	const onAnswer = (type, value) => {
-		temp = questions;
-		temp[index][type] = value;
-		setQuestions([...temp]);
-	}
 	return (
 		<div className='questionWrapper' key={index}>
+			<div className='editButton' onClick={() => setEditing(question.id)}><EditIcon /></div>
 			<div className='column'>
 				<span className='title aBeeZee'>{question.text}</span>
 				<span className='feedBackText'>
@@ -20,7 +16,7 @@ function Question({ question, setQuestions, index, questions }) {
 				</span>
 				<div className='radioWrapper'>
 					{options.map((option, index) => {
-						return <div key={index} className='answerRow cursor' onClick={() => onAnswer('answer', option.id)}>
+						return <div key={index} className='answerRow'>
 							<div className={`circle center ${option.is_true ? 'selected' : ''}`}>
 								{option.is_true && <div className='fill' />}
 							</div>

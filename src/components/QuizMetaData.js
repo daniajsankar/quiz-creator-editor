@@ -10,8 +10,7 @@ function QuizMetaData({ quiz, setEditing }) {
 			<div className='editButton' onClick={() => setEditing(true)}><EditIcon /></div>
 			<div className='column' dir={'ltr'}>
 				<span className='notSelectable title aBeeZee'>{quiz.title}</span>
-				<div className='notSelectable given'
-					dangerouslySetInnerHTML={{ __html: quiz.description }} />
+				<div className='description'>{quiz.description}</div>
 			</div>
 			{quiz.url && <VideosShow link={quiz.url} />}
 			<span className='finalScore'>

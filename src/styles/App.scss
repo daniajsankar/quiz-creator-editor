@@ -263,19 +263,22 @@ form {
         margin-left: 10px;
       }
     }
-    .editButton {
-      position: absolute;
-      right: 30px;
-      top: 21px;
-      cursor: pointer;
+  }
+  .description {
+    white-space: break-spaces;
+  }
+  .editButton {
+    position: absolute;
+    right: 30px;
+    top: 21px;
+    cursor: pointer;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+    &:hover {
       svg {
-        width: 16px;
-        height: 16px;
-      }
-      &:hover {
-        svg {
-          color: $purple;
-        }
+        color: $purple;
       }
     }
   }
@@ -337,8 +340,13 @@ form {
     margin: 4px 0;
     display: flex;
     align-items: center;
+    width: 100%;
     .text {
       padding: 0 20px;
+    }
+    input {
+      width: 100%;
+      margin-left: 10px;
     }
   }
 }
@@ -374,9 +382,9 @@ form {
   input {
     margin: 20px 0;
   }
-  .row {
-    margin: 20px 0;
-  }
+}
+.buttonsRow {
+  margin-top: 20px;
   button {
     font-size: 16px;
     margin: 0 10px;
