@@ -1,0 +1,354 @@
+@import "_variables.scss";
+
+@font-face {
+  font-family: "IBMPlexSansArabic-Regular";
+  src: url("../fonts/IBMPlexSansArabic-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBMPlexSansArabic-SemiBold";
+  src: url("../fonts/IBMPlexSansArabic-SemiBold.ttf");
+  font-display: swap;
+}
+
+body {
+  font-family: "IBMPlexSansArabic-Regular", sans-serif !important;
+  img {
+    max-width: 100%;
+  }
+  ::-moz-selection {
+    background-color: $purple;
+    color: white;
+  }
+  ::selection {
+    background-color: $purple;
+    color: white;
+  }
+}
+[dir="rtl"] {
+  body {
+    text-align: right;
+  }
+}
+.aBeeZee {
+  font-family: "ABeeZee", sans-serif !important;
+}
+[dir="rtl"] {
+  input[type="tel"],
+  input[type="email"] {
+    direction: rtl;
+  }
+  .aBeeZee {
+    font-family: "IBMPlexSansArabic-Regular", sans-serif !important;
+  }
+}
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px !important;
+  &::placeholder {
+    font-size: 16px !important;
+  }
+}
+input,
+textarea {
+  height: 48px;
+  border-radius: 8px;
+  width: 100%;
+  border: 1px solid $gray;
+  outline: none;
+  padding: 10px 15px;
+  font-family: "IBMPlexSansArabic-Regular", sans-serif !important;
+  &:focus {
+    border: 1px solid $purple;
+  }
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 4px solid #ffffff;
+  border-top: 3px solid $purple;
+  &.small {
+    width: 18px;
+    height: 18px;
+    border: 3px solid #ffffff;
+    border-top: 2px solid $purple;
+  }
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-animation: rotating 1s linear infinite;
+  -moz-animation: rotating 1s linear infinite;
+  -ms-animation: rotating 1s linear infinite;
+  -o-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+@-webkit-keyframes rotating
+
+/* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.overlay {
+  position: fixed;
+  background-color: #00000073;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+textarea {
+  resize: none;
+}
+.semiBold {
+  font-family: "IBMPlexSansArabic-SemiBold" !important;
+  font-weight: 700;
+}
+
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  font-family: "IBMPlexSansArabic-Regular", sans-serif !important;
+  &:disabled {
+    background-color: $gray !important;
+    cursor: not-allowed;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#scroll::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background-color: #eeeeee;
+  margin: 20px;
+}
+
+#scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+#scroll::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: $purple;
+  width: 8px;
+}
+#scroll {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: $purple #eeeeee;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.cursor {
+  cursor: pointer;
+}
+.relative {
+  position: relative;
+}
+
+.videosShow {
+  margin: 30px 0;
+  iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+  }
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+.assignmentPage {
+  background-color: $background;
+  padding: 50px 65px 50px 80px;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: space-between;
+  .given {
+    img {
+      max-width: 100%;
+    }
+  }
+  .scroll {
+    overflow-y: auto;
+    padding-right: 15px;
+  }
+  .questionsContainer {
+    width: 50%;
+  }
+  .textContainer {
+    width: calc(50% - 70px);
+    position: relative;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    padding-right: 15px;
+    padding-bottom: 0;
+    .title {
+      font-size: 32px;
+      margin-bottom: 17px;
+    }
+    .finalScore {
+      color: $purple;
+      font-weight: 700;
+    }
+  }
+}
+
+[dir="rtl"] {
+  .assignmentPage {
+    flex-direction: row-reverse;
+    .scroll {
+      padding-left: 15px;
+      padding-right: 0px;
+    }
+    .textContainer {
+      padding-right: 30px;
+      padding-left: 15px;
+    }
+    .direction {
+      direction: rtl;
+    }
+  }
+}
+
+.questionWrapper {
+  ::-moz-selection {
+    background-color: $purple;
+  }
+  ::selection {
+    background-color: $purple;
+  }
+  background-color: white;
+  border-radius: 16px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  position: relative;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid $purple;
+  }
+  .title {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .font12 {
+    font-size: 12px;
+    margin: 20px 0;
+  }
+  .marginBottom {
+    margin-bottom: 20px;
+  }
+  .feedBackText {
+    margin-bottom: 15px;
+  }
+  .answerRow {
+    margin: 4px 0;
+    display: flex;
+    align-items: center;
+    .text {
+      padding: 0 20px;
+    }
+  }
+}
+
+.radioWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .row {
+    margin: 8px 0;
+  }
+  .option {
+    margin: 0 10px;
+  }
+  .circle {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border-radius: 50%;
+    border: 1px solid $gray;
+    &.selected {
+      border-color: $purple;
+    }
+    .fill {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: $purple;
+    }
+  }
+}
+
