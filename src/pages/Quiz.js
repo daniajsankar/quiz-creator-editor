@@ -1,95 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Question from '../components/Question';
 import EditQuestion from '../components/EditQuestion';
 import QuizMetaData from '../components/QuizMetaData';
 import EditQuizMetaData from '../components/EditQuizMetaData';
-import { Plus, Garbage } from '../components/Svgs';
+import { Plus } from '../components/Svgs';
+import { useLocation } from 'react-router-dom';
+import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
+import { DataContext } from '../contexts/data/data.provider';
 
-const Quiz = {
-	"created": "2020-09-09 09:26:39",
-	"description": "Description",
-	"id": 29,
-	"modified": "2020-09-09 09:26:39",
-	"questions_answers": [
-		{
-			"answer_id": null,
-			"answers": [
-				{
-					"id": 122,
-					"is_true": false,
-					"text": "question 1 answer 1 false"
-				},
-				{
-					"id": 123,
-					"is_true": false,
-					"text": "question 1 answer 2 false"
-				},
-				{
-					"id": 124,
-					"is_true": true,
-					"text": "question 1 answer 3 true"
-				},
-				{
-					"id": 125,
-					"is_true": false,
-					"text": "question 1 answer 4 false"
-				}
-			],
-			"feedback_false": "question 1 false feedback",
-			"feedback_true": "question 1 true feedback",
-			"id": 53,
-			"text": "question 1 text"
-		},
-		{
-			"answer_id": null,
-			"answers": [
-				{
-					"id": 126,
-					"is_true": true,
-					"text": "question 2 answer 1 true"
-				},
-				{
-					"id": 127,
-					"is_true": false,
-					"text": "question 2 answer 2 false"
-				}
-			],
-			"feedback_false": "question 2 false feedback",
-			"feedback_true": "question 2 true feedback",
-			"id": 54,
-			"text": "question 2 text"
-		},
-		{
-			"answer_id": null,
-			"answers": [
-				{
-					"id": 128,
-					"is_true": false,
-					"text": "question 3 answer 1 false"
-				},
-				{
-					"id": 129,
-					"is_true": true,
-					"text": "question 3 answer 2 true"
-				},
-				{
-					"id": 130,
-					"is_true": false,
-					"text": "question 3 answer 3 false"
-				}
-			],
-			"feedback_false": "question 3 false feedback",
-			"feedback_true": "question 3 true feedback",
-			"id": 55,
-			"text": "question 3 text"
-		}
-	],
-	"score": null,
-	"title": "quiz title",
-	"url": "https://www.youtube.com/watch?v=e6EGQFJLl04"
-};
-function Assignment({ history }) {
-	const [quiz, setQuiz] = useState(Quiz);
+function QuizPage() {
+	const { quizzes, setQuizzes } = useContext(DataContext);
+	let navigate = useNavigate();
+	const location = useLocation();
+	const [quiz, setQuiz] = useState(location.state.quiz);
 	const [editingQuizMeatData, setEditingQuizMetaData] = useState(false);
 	const [editingQuestion, setEditingQuestion] = useState(null);
 	const { innerHeight: height } = window;
@@ -121,10 +45,19 @@ function Assignment({ history }) {
 		});
 		setQuiz((prev) => ({ ...prev, questions_answers: temp }));
 	}
+	const onSave = () => {
+		temp = quizzes;
+		temp[quiz.index] = quiz;
+		setQuizzes(temp);
+		navigate('/');
+	}
+	const onCancel = () => {
+		navigate('/');
+	}
 	return (
 		<div className={`assignmentPage`}>
 			<div className='textContainer'>
-				<div className="scroll" style={{ height: height - 180 }} id="scroll" >
+				<div className="scroll" style={{ height: height - 210 }} id="scroll" >
 					{editingQuizMeatData ? <EditQuizMetaData quiz={quiz} onCancel={() => setEditingQuizMetaData(false)} onSave={(quiz) => {
 						setEditingQuizMetaData(false);
 						setQuiz((prev) => ({ ...prev, ...quiz }));
@@ -133,7 +66,7 @@ function Assignment({ history }) {
 				</div>
 			</div>
 			<div className={`questionsContainer`}>
-				<div className="scroll" style={{ height: height - 100 }} id="scroll">
+				<div className="scroll" style={{ height: height - 130 }} id="scroll">
 					<div className='direction'>
 						{quiz.questions_answers.map((question, index) => {
 							if (question.id === editingQuestion)
@@ -154,8 +87,16 @@ function Assignment({ history }) {
 					</div>
 				</div>
 			</div>
+			<div className='buttonsRow row absolute'>
+				<button className='saveButton' onClick={onSave}>
+					<FormattedMessage id="save" />
+				</button>
+				<button onClick={onCancel}>
+					<FormattedMessage id="cancel" />
+				</button>
+			</div>
 		</div >
 	);
 }
 
-export default Assignment;
+export default QuizPage;

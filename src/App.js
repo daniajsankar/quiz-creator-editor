@@ -3,6 +3,7 @@ import Routes from './Routes.js';
 import './styles/App.scss';
 import localEn from './translations/en.json';
 import { LanguageProvider } from './contexts/language/language.provider';
+import { DataProvider } from './contexts/data/data.provider';
 
 const messages = {
   en: localEn,
@@ -13,11 +14,13 @@ function App() {
     document.documentElement.setAttribute("lang", lang);
     document.documentElement.setAttribute("dir", lang === 'ar' ? 'rtl' : 'ltr');
   }, []);
-  
+
   if (!lang) return <div />;
   return (
     <LanguageProvider messages={messages} initLocale={lang}>
-      <Routes />
+      <DataProvider>
+        <Routes />
+      </DataProvider>
     </LanguageProvider>
   );
 }
